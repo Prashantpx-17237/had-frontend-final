@@ -29,7 +29,9 @@ export default function Login() {
     console.log({ email, password });
     try {
       const res = await axios.post("/login", { email, password });
+      console.log(res);
       if (res.data.status === "unsuccessfull") {
+        alert(res.data.msg);
         throw res.data.msg;
       }
       console.log(res.data);
