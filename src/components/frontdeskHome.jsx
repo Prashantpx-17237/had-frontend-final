@@ -55,7 +55,7 @@ export default function FrontdeskHome() {
               console.log(response.data);
               console.log(response.data.transactionId);
               setTxnId(response.data.transactionId);
-              setotpBtnDisabled(false)
+              setotpBtnDisabled("false")
               eventSource.close();
             }
             else {
@@ -92,7 +92,7 @@ export default function FrontdeskHome() {
         const eventSource = new EventSource("/confirm-otp?transactionId=" + txnId + "&otp=" + otp);
 
         eventSource.addEventListener("on-confirm", (event) => {
-          setotpBtnDisabled(true)
+          setotpBtnDisabled("true")
           eventSource.close();
           console.log(event.data);
           var response = JSON.parse(event.data);
@@ -142,7 +142,7 @@ export default function FrontdeskHome() {
           }
           else {
             setShowPatientDetails(false);
-            setotpBtnDisabled(true)
+            setotpBtnDisabled("true")
             if (response.msg !== null) {
               alert(response.msg);
               eventSource.close();
@@ -153,7 +153,7 @@ export default function FrontdeskHome() {
             }
             eventSource.close();
           }
-          setotpBtnDisabled(true)
+          setotpBtnDisabled("true")
           setShowPatientDetails(false);
         });
       }
