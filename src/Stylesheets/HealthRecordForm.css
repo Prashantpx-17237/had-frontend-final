@@ -30,3 +30,7 @@
 .InputButton2:hover {
     background-color: #9f9d9d;
 }
+
+.form-group{
+    width: 100px;
+}

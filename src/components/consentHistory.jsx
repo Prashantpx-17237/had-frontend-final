@@ -27,7 +27,7 @@ function ConsentHistory (props) {
 
     return (
     <div>
-        <button type='button' className='btn btn-info' onClick={handleClick} style={{width:"80%"}}>View Previous Records</button>
+        <button type='button' className='btn btn-info' onClick={handleClick} style={{width:"200px"}}>View Previous Records</button>
     </div>
   )
 }

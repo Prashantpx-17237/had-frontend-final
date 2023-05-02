@@ -9,6 +9,9 @@ import ConsentHistory from "./consentHistory";
 export default function Prescription() {
     const [appointmentID, setAppointmentID] = useState();
     const [verified, setVerified] = useState(false);
+    const [patientName, setPatientName] = useState('');
+    const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
 
     useEffect(() => {
         console.log(appointmentID);
@@ -21,7 +24,11 @@ export default function Prescription() {
             const response = await axios.get("/visit", { appointmentID });
             if (response.data.data.status === "successfull") {
                 console.log(response.data.data);
+                patientName = setPatientName(response.data.patientName);
+                gender = setGender(response.data.gender);
+                age = setAge(response.data.age);
                 setVerified(true);
+
             }
         } catch (error) {
             setVerified(true);
@@ -37,8 +44,8 @@ export default function Prescription() {
     return (
 
         <div>
-            <div className="container-sm bg bg-white shadow-sm p-3" style={{ dispaly: "flex" }}>
-                <div className="input-group mb-3" style={{ maxWidth: "auto" }}>
+            <div className="container-sm bg bg-white shadow-sm mt-4" style={{ dispaly: "flex" }}>
+                <div className="input-group" style={{ maxWidth: "auto" }}>
                     <input type="text" className="form-control" placeholder="Visit Id..."
                         style={{ border: "1px solid chocolate" }}
                         aria-label="Recipient's username" aria-describedby="basic-addon2"
@@ -48,17 +55,18 @@ export default function Prescription() {
                     </div>
                 </div>
             </div>
-            <div style={{ marginTop: "45px", jus: "start" }}>
-                {(verified) && <div> <HealthRecordForm /></div>}
-            </div>
-            <div className="row">
-                <div className="col">
-                    <Moddle />
+            {(verified) && <div>
+                <div> <HealthRecordForm visitId={appointmentID}
+                    doctorId={localStorage.getItem('doctorId')} name={patientName} sex={gender} Age={age} /></div>
+                <div className="row">
+                    <div className="col">
+                        <Moddle />
+                    </div>
+                    <div className="col">
+                        <ConsentHistory />
+                    </div>
                 </div>
-                <div className="col">
-                    <ConsentHistory />
-                </div>
-            </div>
+            </div>}
         </div>
     );
 }
