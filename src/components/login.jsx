@@ -9,8 +9,8 @@ export default function Login() {
     textAlign: "left",
     boxShadow: "5px 5px 5px gray",
     border: "solid",
-    padding: "1rem",
-    marginTop: "2rem",
+    padding: "3rem 2rem",
+    marginTop: "5rem",
     borderRadius: "10px",
   };
 
@@ -50,43 +50,45 @@ export default function Login() {
     }
   };
   return (
-    <div className="container col-md-3" style={cardStyle}>
-      <form onSubmit={handleLogin}>
-        <h3 style={{ textAlign: "center" }}>Login</h3>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          class="btn btn-dark"
-          style={{ marginTop: "1rem", width: "100%" }}
-        >
-          Login
-        </button>
-        {/* <a href="#" class="forgot-password-link" style={{display:"block"}}>
+    <div style={{minHeight: "60vh"}}>
+      <div className="container col-md-3 cardStyle" style={cardStyle}>
+        <form onSubmit={handleLogin}>
+          <h1 style={{ textAlign: "center" }}>Login</h1> <br/>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-dark"
+            style={{ marginTop: "1rem", width: "100%" }}
+          >
+            Login
+          </button>
+          {/* <a href="#" class="forgot-password-link" style={{display:"block"}}>
           Forgot password?
         </a> */}
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,81 @@ import React, { useState } from "react";
 import '../Stylesheets/HealthRecordForm.css'
 // import healthRecordService from '../Services/HealthRecordService'
 import swal from "sweetalert";
-const HealthRecordForm = ({ user }) => {
+
+
+
+const HealthRecordForm = () => {
+
+  const [patientName, setPatientName] = useState('');
+  const [diagnosis, setDiagnosis] = useState('');
+  const [dosage, setDosage] = useState('');
+  const [medicine, setMedicine] = useState('');
+  const [gender, setGender] = useState('');
+  const [age, setAge] = useState('');
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event);
+  };
+
+  return (
+    <div >
+      <div className="container -sm" style={{ display: "flex" }}>
+        
+        <form>
+
+          <div className="form-group" >
+            <label htmlFor="patientName">Patient Name </label>
+            <input type="text" className="form-control" id="patName" value={patientName} />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="gender">Gender</label>
+            <input type="text" className="form-control" id="gender"  />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="age">Age</label>
+            <input type="text" className="form-control" id="age"  />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="diagnosis">Diagnosis</label>
+            <input type="text" className="form-control" id="diagnosis"  />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="medicine">Medicine</label>
+            <input type="text" className="form-control" id="medicine"  />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="dosage">Dosage</label>
+            <input type="text" className="form-control" id="dosage"  />
+          </div>
+          
+          <button type="submit" className="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const HealthRecordForm = ({ user }) => {
   const [medicines, setMedicines] = useState([]);
   const [dosages, setDosages] = useState([]);
   const [newMedicine, setNewMedicine] = useState("");
@@ -12,33 +86,15 @@ const HealthRecordForm = ({ user }) => {
   const [problem, setProblem] = useState('');
   const [treatment, setTreatment] = useState('');
   //console.log(user)
-
+ 
   const handleNewMedicineChange = (event) => {
     setNewMedicine(event.target.value);
   };
   const handleNewDosageChange = (event) => {
     setNewDosage(event.target.value);
   };
-
-  const handleAddMedicine = () => {
-    if (newMedicine !== "" && newDosage !== "") {
-      setMedicines([...medicines, newMedicine]);
-      setNewMedicine("");
-      setDosages([...dosages, newDosage]);
-      setNewDosage("");
-    }
-    else {
-      swal({
-        text: "Enter All Fields To Add this to Prescription!",
-        icon: " warning",
-        button: "Okay",
-      }).then(() => {
-        setNewMedicine("");
-        setNewDosage("");
-      })
-
-    }
-  };
+ 
+ 
   //Backend Service Call...
   const healthRecordHandler = async (healthRecord) => {
     try {
@@ -61,7 +117,7 @@ const HealthRecordForm = ({ user }) => {
         }).then(() => {
           window.location.reload(true);
         })
-
+ 
       }
       else {
         swal({
@@ -72,7 +128,7 @@ const HealthRecordForm = ({ user }) => {
         }).then(() => {
           window.location.reload(true);
         })
-
+ 
       }
     }
     catch (exception) {
@@ -84,8 +140,8 @@ const HealthRecordForm = ({ user }) => {
       });
     }
   }
-
-
+ 
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
     const prescriptions = medicines.map((item, index) => {
@@ -94,8 +150,8 @@ const HealthRecordForm = ({ user }) => {
         "dosage": parseInt(dosages[index])
       }
     })
-
-
+ 
+ 
     const healthRecord = {
       "recordDto": {
         "patientId": patientId,
@@ -116,9 +172,9 @@ const HealthRecordForm = ({ user }) => {
     setTreatment('');
     setNewMedicine("");
     setNewDosage("");
-
+ 
   };
-
+ 
   return (
     <div className="container -sm" style={{ display: "flex", flexWrap: "wrap", background: "lightgrey"}}>
       <form onSubmit={handleSubmit}>
@@ -156,14 +212,9 @@ const HealthRecordForm = ({ user }) => {
           <input type="number" className="InputText" value={newDosage} onChange={handleNewDosageChange} />
         </div>
         <br/>
-        <button type="button" onClick={handleAddMedicine} className='btn btn-dark' style={{ margin: "0 10px" }}>
-          Add Medicine
-        </button>
-        <br />
         <button type="submit" className='btn btn-dark' style={{ marginBottom: "10px", marginTop: "10px" }}>Save Health Record</button>
       </form>
     </div>
   );
-};
-
+};*/
 export default HealthRecordForm;

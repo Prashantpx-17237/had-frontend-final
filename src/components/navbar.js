@@ -7,7 +7,7 @@ export default function Navbar() {
       style={{ padding: "1.1rem", color: "white" }}
     >
       <a className="navbar-brand" href="/" style={{ fontSize: "2rem" }}>
-        HIP1
+        Hospital
       </a>
       <button
         className="navbar-toggler"
@@ -22,14 +22,14 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent: "end"}}>
         <div className="navbar-nav" style={{}}>
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Home
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Logout
               </a>
             </li>

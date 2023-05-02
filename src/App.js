@@ -1,11 +1,12 @@
 import logo from "./logo.svg";
 import "./App.css";
-import {  BrowserRouter as Router,  Routes,  Switch,  Route,  Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/login";
 import DoctorHome from "./components/doctorHome";
 import AdminHome from "./components/adminHome";
 import FrontdeskHome from "./components/frontdeskHome";
 import Navbarbase from "./components/navbar";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
           <Route path="/admin/home" element={<AdminHome />} />
           <Route path="/frontdesk/home" element={<FrontdeskHome />} />
         </Routes>
+        <div style={{height: "5vh"}}>
+          <Footer />
+        </div>
       </Router>
     </div>
   );

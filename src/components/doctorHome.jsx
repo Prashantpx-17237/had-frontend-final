@@ -3,7 +3,7 @@ import Prescription from './prescription'
 
 const doctorHome = () => {
   return (
-    <div>
+    <div style={{minHeight: "63vh"}}>
         <Prescription/>
     </div>
   )

@@ -1,0 +1,84 @@
+.footer-container{
+    /* max-width: 1170px; rgb(100,152,178)*/
+    padding: 0px 24px;
+    margin: auto;
+    background-color: rgb(96, 156, 121);
+    max-height: 80vh;
+}
+.footer-col ul{
+    list-style: none;
+}
+.footer-row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.footerPage{
+    background-color:  rgb(96, 156, 121);
+    padding: 10px 0 10px 0;
+}
+.copyright p{
+    color: #fff;
+    border-top: rgb(242, 197, 107) solid 1px;
+    padding-top: 5px;
+    text-align: center;
+    background-color:  rgb(96, 156, 121);
+}
+
+.footer-col{
+    width: 20%;
+    padding: 0 15px 10px 15px;
+    background-color:  rgb(96, 156, 121);
+}
+.footer-col h4{
+    font-size: 18px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    position: relative;
+    background-color:  rgb(96, 156, 121);
+}
+.footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: rgb(242, 197, 107);
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+.footer-col h5{
+    font-size: 16px;
+    color:#fff;
+}
+.footer-col h5 a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+    background-color:  rgb(96, 156, 121);
+}
+.footer-col ul li a:hover{
+    color: #fff;
+    padding-left:8px;
+}
+.footer-col .social-links a{
+    /* display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: all 0.5s ease; */
+    color: #fff;
+    text-decoration: none;
+}
