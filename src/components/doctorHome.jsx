@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react'
+import Prescription from './prescription'
 
-export default function DoctorHome(){
-    return(
-        <h1>Doctor</h1>
-    );
+const doctorHome = () => {
+  return (
+    <div>
+        <Prescription/>
+    </div>
+  )
 }
+
+export default doctorHome

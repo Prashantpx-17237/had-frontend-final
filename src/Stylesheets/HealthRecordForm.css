@@ -1,0 +1,32 @@
+.HealthRecodsFormContainer2{
+    padding: 12px 24px;
+}
+.InputLabel2{
+    margin-left: 5px;
+    color: darkblue;
+}
+.MedicineOL{
+
+}
+
+.InputText2 {
+    padding: 8px 24px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ededed;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.InputButton2 {
+    margin: 12px;
+    padding: 8px 20px;
+    background-color: #24262b;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.InputButton2:hover {
+    background-color: #9f9d9d;
+}

@@ -1,16 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Navbar from "./components/navbar";
 import {  BrowserRouter as Router,  Routes,  Switch,  Route,  Link } from "react-router-dom";
 import Login from "./components/login";
 import DoctorHome from "./components/doctorHome";
 import AdminHome from "./components/adminHome";
 import FrontdeskHome from "./components/frontdeskHome";
+import Navbarbase from "./components/navbar";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+      <Navbarbase />
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -23,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;   

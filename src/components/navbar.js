@@ -20,7 +20,7 @@ export default function Navbar() {
       >
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup" style={{justifyContent: "end"}}>
         <div className="navbar-nav" style={{}}>
           <ul class="navbar-nav">
             <li class="nav-item">
