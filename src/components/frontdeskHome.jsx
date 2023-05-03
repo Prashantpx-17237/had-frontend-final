@@ -45,7 +45,7 @@ export default function FrontdeskHome() {
     const handleAbhaId = async(e)=>{
         e.preventDefault();
         try {
-          const eventSource = new EventSource("/generate-otp?abhaId=" + id);
+          const eventSource = new EventSource("/generate-otp?abha_id=" + id);
 
           eventSource.addEventListener("on-init", (event) => {
             console.log(event.data);
