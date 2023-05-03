@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import NavbarCollapse from "react-bootstrap/esm/NavbarCollapse";
 // import "./nav.css";
+
+import NotLoggedIn from "../service/notLoggedIn";
+import { isloggedIn } from "../service/auth";
+
 export default function Navbar() {
+  
+  const functionToLogout = () => {
+    localStorage.clear();
+    <NotLoggedIn/>
+  }
+
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark bg-dark"
@@ -24,14 +35,14 @@ export default function Navbar() {
         <div className="navbar-nav" style={{}}>
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/">
                 Home
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              {(isloggedIn ) && <a className="nav-link" href="/" onClick={functionToLogout}>
                 Logout
-              </a>
+              </a>}
             </li>
           </ul>
         </div>

@@ -12,10 +12,23 @@ export function isDoctor(){
     return false;
 }
 
-
+export function isloggedIn(){
+    if(localStorage.getItem('id')){
+        return true;
+    }
+    return false;
+}
 /***************************** Handle Logout ***********************/
 
 export const logout = () => {
     localStorage.clear();
   return ;
+}
+
+/*************************** Handle Admin *************************/
+export function isAdmin(){
+    if(localStorage.getItem('id') && localStorage.getItem('type')==="admin"){
+        return true;
+    }
+    return false;
 }

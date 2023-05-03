@@ -31,7 +31,12 @@ const HealthRecordForm = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.post("/visit", { visitId, doctorId, patientName, gender, age, medicine, dosage, diagnosis });
+    const response = await axios.patch("/update-visit", { 
+      "visitId": visitId, 
+      doctorId: localStorage.getItem("id"), 
+      "prescription": medicine,
+      "dosageInstruction": dosage,
+      diagnosis });
     try {
       if (response.data.data.status === "successfull") {
         swal({
@@ -74,6 +79,8 @@ const HealthRecordForm = (props) => {
               <div className="form-group">
                 <label htmlFor="diagnosis">Diagnosis</label>
                 <input type="text" className="form-control" id="diagnosis"
+                  disabled={props.isDisabled}
+                  value= {props.diagnosis}
                   onChange={event => setDiagnosis(event.target.value)} />
               </div>
             </div>
@@ -81,17 +88,21 @@ const HealthRecordForm = (props) => {
               <div className="form-group">
                 <label htmlFor="medicine">Medicine</label>
                 <input type="text" className="form-control" id="medicine"
+                  value = {props.medicine}
+                  disabled={props.isDisabled}
                   onChange={event => setMedicine(event.target.value)} />
               </div>
 
               <div className="form-group">
                 <label htmlFor="dosage">Dosage</label>
                 <input type="text" className="form-control" id="dosage"
+                  value={props.dosage}
+                  disabled={props.isDisabled}
                   onChange={event => setDosage(event.target.value)} />
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
+            <button disabled={props.isDisabled} type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
           </form>
         </div>
       </div>

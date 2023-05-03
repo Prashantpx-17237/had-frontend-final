@@ -5,36 +5,72 @@ import HealthRecordForm from "./healthRecod";
 import Moddle from "./moddle";
 import swal from "sweetalert";
 import ConsentHistory from "./consentHistory";
+import ReactJsonPrint from 'react-json-print'
+
+
 
 export default function Prescription() {
-    const [appointmentID, setAppointmentID] = useState();
+    const [visitId, setVisitId] = useState();
     const [verified, setVerified] = useState(false);
     const [patientName, setPatientName] = useState('');
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
+    const [visitsData, setVisitsData] = useState(null);
+    const [isDisabled, setIsDisabled] = useState(false)
+    const [diagnosis, setDiagnosis] = useState("")
+    const [medicine, setMedicine] = useState("")
+    const [dosage, setDosage] = useState("")
+    const [patientId, setPatientId] = useState("")
 
     useEffect(() => {
-        console.log(appointmentID);
-    }, [appointmentID])
+        console.log(visitId);
+    }, [visitId])
+
+    const handleReset = (event) => {
+        setVisitsData(null);
+        setVisitId("")
+        setPatientId(null)
+        setPatientName(null)
+        setGender(null)
+        setDiagnosis(null)
+        setDosage(null)
+        setVerified(false)
+    }
 
     /**************************** Toggles value of appointmentId to true when we have a valid visit **********************/
     const handleSubmit = async (event) => {
-        console.log(appointmentID);
+        console.log(visitId);
         try {
-            const response = await axios.get("/visit", { appointmentID });
-            if (response.data.data.status === "successfull") {
-                console.log(response.data.data);
-                patientName = setPatientName(response.data.patientName);
-                gender = setGender(response.data.gender);
-                age = setAge(response.data.age);
-                setVerified(true);
-
+            const res = await axios.post("/visit", {
+                "visitId": visitId,
+                "doctorId": localStorage.getItem("id")
+            });
+            console.log(res);
+            if (res.data.status === "successfull") {
+                alert(res.data.msg);
+                setPatientName(res.data.data.patient.name);
+                setGender(res.data.data.patient.gender);
+                setAge(res.data.data.patient.age);
+                setVerified(true)
+                setVisitsData(res.data.data.consentRequests)
+                setIsDisabled(res.data.data.visit.isDisabled)
+                setDiagnosis(res.data.data.visit.diagnosis)
+                setMedicine(res.data.data.visit.prescription)
+                setDosage(res.data.data.visit.dosageInstruction)
+                setPatientId("" + res.data.data.patient.id)
+            }
+            else {
+                swal({
+                    title: "Error occurred",
+                    text: res.data.msg,
+                    icon: "error",
+                    button: "Okay",
+                });
             }
         } catch (error) {
-            setVerified(true);
             swal({
-                title: "Invalid visit ID",
-                text: "Failed to verify visit, try again with correct visit id!!!" + error,
+                title: "Error Occured.",
+                text: "Error occured while fetching data. Please try again later." + error,
                 icon: "error",
                 button: "Okay",
             });
@@ -49,21 +85,28 @@ export default function Prescription() {
                     <input type="text" className="form-control" placeholder="Visit Id..."
                         style={{ border: "1px solid chocolate" }}
                         aria-label="Recipient's username" aria-describedby="basic-addon2"
-                        value={appointmentID} onChange={(e) => setAppointmentID(e.target.value)} />
+                        value={visitId} onChange={(e) => setVisitId(e.target.value)} />
                     <div className="input-group-append">
                         <button className="btn btn-outline-primary mx-3" type="button" onClick={handleSubmit}>Validate</button>
+                    </div>
+                    <div className="input-group-append">
+                        <button className="btn btn-outline-primary mx-3" type="button" onClick={handleReset}>Reset</button>
                     </div>
                 </div>
             </div>
             {(verified) && <div>
-                <div> <HealthRecordForm visitId={appointmentID}
-                    doctorId={localStorage.getItem('doctorId')} name={patientName} sex={gender} Age={age} /></div>
+                <div> <HealthRecordForm visitId={visitId}
+                    doctorId={localStorage.getItem('doctorId')} name={patientName} sex={gender} Age={age} isDisabled={isDisabled} dosage={dosage} medicine={medicine} diagnosis={diagnosis}/></div>
                 <div className="row">
                     <div className="col">
-                        <Moddle />
+                        <Moddle 
+                        visitId={visitId}
+                        doctorId={localStorage.getItem('id')}
+                        patientId={patientId}/>
                     </div>
                     <div className="col">
                         <ConsentHistory />
+                        {(visitsData !== null) && <ReactJsonPrint dataObject={{ visitsData }} />}
                     </div>
                 </div>
             </div>}
