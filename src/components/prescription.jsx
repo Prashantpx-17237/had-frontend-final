@@ -16,6 +16,11 @@ export default function Prescription() {
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
     const [visitsData, setVisitsData] = useState(null);
+    const [isDisabled, setIsDisabled] = useState(false)
+    const [diagnosis, setDiagnosis] = useState("")
+    const [medicine, setMedicine] = useState("")
+    const [dosage, setDosage] = useState("")
+    const [patientId, setPatientId] = useState("")
 
     useEffect(() => {
         console.log(visitId);
@@ -23,6 +28,13 @@ export default function Prescription() {
 
     const handleReset = (event) => {
         setVisitsData(null);
+        setVisitId("")
+        setPatientId(null)
+        setPatientName(null)
+        setGender(null)
+        setDiagnosis(null)
+        setDosage(null)
+        setVerified(false)
     }
 
     /**************************** Toggles value of appointmentId to true when we have a valid visit **********************/
@@ -31,16 +43,21 @@ export default function Prescription() {
         try {
             const res = await axios.post("/visit", {
                 "visitId": visitId,
-                "doctorId": "1"
+                "doctorId": localStorage.getItem("id")
             });
             console.log(res);
             if (res.data.status === "successfull") {
                 alert(res.data.msg);
-                patientName = setPatientName(res.data.patientName);
-                gender = setGender(res.data.gender);
-                age = setAge(res.data.age);
+                setPatientName(res.data.data.patient.name);
+                setGender(res.data.data.patient.gender);
+                setAge(res.data.data.patient.age);
                 setVerified(true)
                 setVisitsData(res.data.data.consentRequests)
+                setIsDisabled(res.data.data.visit.isDisabled)
+                setDiagnosis(res.data.data.visit.diagnosis)
+                setMedicine(res.data.data.visit.prescription)
+                setDosage(res.data.data.visit.dosageInstruction)
+                setPatientId("" + res.data.data.patient.id)
             }
             else {
                 swal({
@@ -79,28 +96,18 @@ export default function Prescription() {
             </div>
             {(verified) && <div>
                 <div> <HealthRecordForm visitId={visitId}
-                    doctorId={localStorage.getItem('doctorId')} name={patientName} sex={gender} Age={age} /></div>
+                    doctorId={localStorage.getItem('doctorId')} name={patientName} sex={gender} Age={age} isDisabled={isDisabled} dosage={dosage} medicine={medicine} diagnosis={diagnosis}/></div>
                 <div className="row">
                     <div className="col">
-                        <Moddle />
+                        <Moddle 
+                        visitId={visitId}
+                        doctorId={localStorage.getItem('id')}
+                        patientId={patientId}/>
                     </div>
                     <div className="col">
                         <ConsentHistory />
+                        {(visitsData !== null) && <ReactJsonPrint dataObject={{ visitsData }} />}
                     </div>
-                </div>
-                <div style={{ marginTop: "45px", jus: "start" }}>
-                    {(verified) && <div> <HealthRecordForm /></div>}
-                </div>
-                <div className="row">
-                    <div className="col">
-                        {(visitsData !== null) && <Moddle />}
-                    </div>
-                    {/* <div>
-                    {(visitsData !== null) &&  <ConsentHistory data={visitsData} />}
-                </div> */}
-                </div>
-                <div style={{ pos: 0 }}>
-                    {(visitsData !== null) && <ReactJsonPrint dataObject={{ visitsData }} />}
                 </div>
             </div>}
         </div>
